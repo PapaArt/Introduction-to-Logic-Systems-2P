@@ -1,3 +1,4 @@
+//CODIGO GRAY
 `include "binario.v"
 
 module binario_tb;
