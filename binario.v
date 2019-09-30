@@ -1,3 +1,4 @@
+//CODIGO GRAY
 module binario(binario,gray);
 
 input      [3:0]binario;
