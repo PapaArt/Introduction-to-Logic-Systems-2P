@@ -37,16 +37,23 @@ module tp(clk,reset,ok,tom,nota,fim,tipo,display);
 									      la  = 3'b110,
 									      si  = 3'b111;
 
-	def[1:0]                   tipo_invalido = 2'b00,
+	def[1:0]                       tipo_nulo = 2'b00,
 								    tipo_adj = 2'b01,
  								    tipo_comp= 2'b10,
 								    tipo_adv = 2'b11;
 
 	def                               final  = 1'b1;
 							     em_processo = 1'b0;
+	
+	reg[4:0]estados=estado_inicial;
 
-
+	always @(posedge clk) begin
+		if(reset)
+			estatos=estado_inicial;
+		else if(ok) begin
+			case(estados)
+				
+			endcase
+		end
+	end	
 endmodule
-
-								 
-
