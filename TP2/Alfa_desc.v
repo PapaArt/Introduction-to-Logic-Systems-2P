@@ -1,4 +1,4 @@
-module Alfa(Tom, notas1, notas2, notas3, saida1, saida2, saida3, saida4, saida5, saida6, saida7);
+module Alfa_desc(Tom, notas1, notas2, notas3, saida1, saida2, saida3, saida4, saida5, saida6, saida7);
     input wire  Tom;
     input wire notas1, notas2, notas3; // B, C e D
     output reg saida1, saida2, saida3, saida4, saida5, saida6, saida7;
