@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><!--Created with JFLAP 7.1.--><structure>
+	<type>moore</type>
+	<automaton>
+		<!--The list of states.-->
+		<state id="0" name="Inicio">
+			<x>88.0</x>
+			<y>151.0</y>
+			<initial/>
+			<output>00</output>
+		</state>
+		<state id="1" name="1°Letra">
+			<x>243.0</x>
+			<y>151.0</y>
+			<output>00</output>
+		</state>
+		<state id="2" name="2°Letra">
+			<x>409.0</x>
+			<y>42.0</y>
+			<output>01</output>
+		</state>
+		<state id="3" name="2°Letra">
+			<x>412.0</x>
+			<y>153.0</y>
+			<output>01</output>
+		</state>
+		<state id="4" name="2°Letra">
+			<x>410.0</x>
+			<y>270.0</y>
+			<output>01</output>
+		</state>
+		<state id="5" name="3°Letra">
+			<x>632.0</x>
+			<y>42.0</y>
+			<output>00</output>
+		</state>
+		<state id="6" name="3°Letra">
+			<x>630.0</x>
+			<y>153.0</y>
+			<output>00</output>
+		</state>
+		<state id="7" name="3°Letra">
+			<x>625.0</x>
+			<y>270.0</y>
+			<output>00</output>
+		</state>
+		<state id="8" name="Final0">
+			<x>831.0</x>
+			<y>42.0</y>
+			<output>01</output>
+		</state>
+		<state id="9" name="Final1">
+			<x>829.0</x>
+			<y>153.0</y>
+			<output>10</output>
+		</state>
+		<state id="10" name="Final2">
+			<x>829.0</x>
+			<y>270.0</y>
+			<output/>
+		</state>
+		<!--The list of transitions.-->
+		<transition>
+			<from>5</from>
+			<to>8</to>
+			<read>ok=1</read>
+			<transout>01</transout>
+		</transition>
+		<transition>
+			<from>10</from>
+			<to>10</to>
+			<read/>
+			<transout/>
+		</transition>
+		<transition>
+			<from>1</from>
+			<to>3</to>
+			<read>ok=1,Letra=(A/B)m</read>
+			<transout>01</transout>
+		</transition>
+		<transition>
+			<from>4</from>
+			<to>7</to>
+			<read>ok=1,Letra=Bm</read>
+			<transout>00</transout>
+		</transition>
+		<transition>
+			<from>3</from>
+			<to>6</to>
+			<read>ok=1,Letra=C/D</read>
+			<transout>00</transout>
+		</transition>
+		<transition>
+			<from>1</from>
+			<to>2</to>
+			<read>ok=1,Letra=x</read>
+			<transout>01</transout>
+		</transition>
+		<transition>
+			<from>7</from>
+			<to>10</to>
+			<read>ok=1</read>
+			<transout/>
+		</transition>
+		<transition>
+			<from>1</from>
+			<to>4</to>
+			<read>ok=1,Letra=Am</read>
+			<transout>01</transout>
+		</transition>
+		<transition>
+			<from>2</from>
+			<to>5</to>
+			<read>ok=1,Letra=(A/B)m</read>
+			<transout>00</transout>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>1</to>
+			<read>ok=1,Letra=X</read>
+			<transout>00</transout>
+		</transition>
+		<transition>
+			<from>6</from>
+			<to>9</to>
+			<read>ok=1</read>
+			<transout>10</transout>
+		</transition>
+		<note>
+			<text/>
+			<x>397.0</x>
+			<y>366.0</y>
+		</note>
+	</automaton>
+</structure>
