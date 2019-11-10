@@ -41,4 +41,8 @@ modulo tp(clk,reset,ok,tom,nota,fim,tipo,display);
  								    tipo_comp= 2'b10,
 								    tipo_adv = 2'b11;
 
-									
+	def                               final  = 1'b1;
+							     em_processo = 1'b0;
+
+								 
+
