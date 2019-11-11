@@ -44,13 +44,13 @@ module tp(clk,reset,ok,tom,nota,fim,tipo,display);
 									      la  = 2'b110,
 									      si  = 2'b111;
 
-	localparam[1:0]                tipo_nulo = 2'b00,
-								    tipo_adj = 2'b01,
- 								    tipo_comp= 2'b10,
-								    tipo_adv = 2'b11;
+	localparam[1:0]                tipo_nulo = 1'b00,
+								    tipo_adj = 1'b01,
+ 								    tipo_comp= 1'b10,
+								    tipo_adv = 1'b11;
 
-	localparam                    finalizado = 1'b1,
-							     em_processo = 1'b0;
+	localparam                    finalizado = 1,
+							     em_processo = 0;
 	
 	reg[4:0]estados=estado_inicial;
 
