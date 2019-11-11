@@ -8,80 +8,146 @@
 			<initial/>
 			<output>00</output>
 		</state>
-		<state id="1" name="1°Letra">
-			<x>243.0</x>
+		<state id="1" name="3°Letra">
+			<x>617.0</x>
+			<y>47.0</y>
+			<output>00</output>
+		</state>
+		<state id="2" name="4°Letra">
+			<x>790.0</x>
+			<y>47.0</y>
+			<output>00</output>
+		</state>
+		<state id="3" name="4°Letra">
+			<x>788.0</x>
 			<y>151.0</y>
 			<output>00</output>
 		</state>
-		<state id="2" name="2°Letra">
-			<x>409.0</x>
-			<y>42.0</y>
-			<output>01</output>
-		</state>
-		<state id="3" name="2°Letra">
-			<x>412.0</x>
-			<y>153.0</y>
-			<output>01</output>
-		</state>
-		<state id="4" name="2°Letra">
-			<x>410.0</x>
-			<y>270.0</y>
-			<output>01</output>
-		</state>
-		<state id="5" name="3°Letra">
-			<x>632.0</x>
-			<y>42.0</y>
+		<state id="4" name="4°Letra">
+			<x>789.0</x>
+			<y>267.0</y>
 			<output>00</output>
 		</state>
-		<state id="6" name="3°Letra">
-			<x>630.0</x>
-			<y>153.0</y>
+		<state id="5" name="5°Letra">
+			<x>1005.0</x>
+			<y>47.0</y>
 			<output>00</output>
 		</state>
-		<state id="7" name="3°Letra">
-			<x>625.0</x>
-			<y>270.0</y>
+		<state id="6" name="5°Letra">
+			<x>1002.0</x>
+			<y>151.0</y>
+			<output>00</output>
+		</state>
+		<state id="7" name="5°Letra">
+			<x>997.0</x>
+			<y>267.0</y>
 			<output>00</output>
 		</state>
 		<state id="8" name="Final0">
-			<x>831.0</x>
-			<y>42.0</y>
+			<x>1188.0</x>
+			<y>47.0</y>
 			<output>01</output>
 		</state>
 		<state id="9" name="Final1">
-			<x>829.0</x>
-			<y>153.0</y>
+			<x>1186.0</x>
+			<y>151.0</y>
 			<output>10</output>
 		</state>
 		<state id="10" name="Final2">
-			<x>829.0</x>
-			<y>270.0</y>
+			<x>1186.0</x>
+			<y>267.0</y>
+			<output>11</output>
+		</state>
+		<state id="11" name="3°Letra">
+			<x>612.0</x>
+			<y>151.0</y>
+			<output>00</output>
+		</state>
+		<state id="12" name="3°Letra">
+			<x>611.0</x>
+			<y>267.0</y>
+			<output>00</output>
+		</state>
+		<state id="13" name="1°Letra">
+			<x>280.0</x>
+			<y>151.0</y>
+			<output>00</output>
+		</state>
+		<state id="14" name="2°Letra">
+			<x>457.0</x>
+			<y>47.0</y>
+			<output>01</output>
+		</state>
+		<state id="15" name="2°Letra">
+			<x>451.0</x>
+			<y>151.0</y>
+			<output>10</output>
+		</state>
+		<state id="16" name="2°Letra">
+			<x>445.0</x>
+			<y>267.0</y>
 			<output>11</output>
 		</state>
 		<!--The list of transitions.-->
 		<transition>
-			<from>0</from>
+			<from>2</from>
+			<to>5</to>
+			<read>ok=1,Letra=(A/B)m</read>
+			<transout>00</transout>
+		</transition>
+		<transition>
+			<from>12</from>
+			<to>4</to>
+			<read>ok=1,Letra=Am</read>
+			<transout>00</transout>
+		</transition>
+		<transition>
+			<from>13</from>
+			<to>14</to>
+			<read>ok=1,Letra!=x</read>
+			<transout>01</transout>
+		</transition>
+		<transition>
+			<from>14</from>
 			<to>1</to>
-			<read>ok=1,Letra=X</read>
+			<read>ok=1,Letra!=x</read>
+			<transout>00</transout>
+		</transition>
+		<transition>
+			<from>1</from>
+			<to>2</to>
+			<read>ok=1,Letra=x</read>
+			<transout>00</transout>
+		</transition>
+		<transition>
+			<from>13</from>
+			<to>16</to>
+			<read>ok=1,Letra!=x</read>
+			<transout>11</transout>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>13</to>
+			<read>ok=1,Letra!=x</read>
 			<transout>00</transout>
 		</transition>
 		<transition>
 			<from>6</from>
 			<to>9</to>
-			<read>ok=1</read>
+			<read>ok=1,Letra=x</read>
 			<transout>10</transout>
 		</transition>
 		<transition>
-			<from>1</from>
-			<to>3</to>
-			<read>ok=1,Letra=(A/B)m</read>
-			<transout>01</transout>
+			<from>13</from>
+			<to>15</to>
+			<read>ok=1,Letra!=x</read>
+			<transout>10</transout>
 		</transition>
 		<transition>
-			<from>7</from>
-			<to>10</to>
-			<read>ok=1</read>
-			<transout>11</transout>
+			<from>11</from>
+			<to>3</to>
+			<read>ok=1,Letra=(A/B)m</read>
+			<transout>00</transout>
 		</transition>
 		<transition>
 			<from>4</from>
@@ -90,33 +156,33 @@
 			<transout>00</transout>
 		</transition>
 		<transition>
-			<from>5</from>
-			<to>8</to>
-			<read>ok=1</read>
-			<transout>01</transout>
-		</transition>
-		<transition>
-			<from>1</from>
-			<to>2</to>
-			<read>ok=1,Letra=x</read>
-			<transout>01</transout>
-		</transition>
-		<transition>
 			<from>3</from>
 			<to>6</to>
 			<read>ok=1,Letra=C/D</read>
 			<transout>00</transout>
 		</transition>
 		<transition>
-			<from>1</from>
-			<to>4</to>
-			<read>ok=1,Letra=Am</read>
+			<from>5</from>
+			<to>8</to>
+			<read>ok=1,Letra=x</read>
 			<transout>01</transout>
 		</transition>
 		<transition>
-			<from>2</from>
-			<to>5</to>
-			<read>ok=1,Letra=(A/B)m</read>
+			<from>16</from>
+			<to>12</to>
+			<read>ok=1,Letra!=x</read>
+			<transout>00</transout>
+		</transition>
+		<transition>
+			<from>7</from>
+			<to>10</to>
+			<read>ok=1,Letra=x</read>
+			<transout>11</transout>
+		</transition>
+		<transition>
+			<from>15</from>
+			<to>11</to>
+			<read>ok=1,Letra!=x</read>
 			<transout>00</transout>
 		</transition>
 	</automaton>

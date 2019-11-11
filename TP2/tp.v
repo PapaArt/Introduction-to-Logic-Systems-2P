@@ -9,7 +9,7 @@ module tp(clk,reset,ok,tom,nota,fim,tipo,display);
 
     Alfa_desc Adverbio(Tom, notas1, notas2, notas3, saida1, saida2, saida3, saida4, saida5, saida6, saida7);
 
-    def[4:0]     		    estado_inicial    = 5'b00000,
+	def[4:0]				estado_inicial    = 5'b00000,
 							estado_nota1      = 5'b00001,
 							estado_nota2_adj  = 5'b00010,
 							estado_nota2_comp = 5'b00011,
@@ -26,7 +26,8 @@ module tp(clk,reset,ok,tom,nota,fim,tipo,display);
 							estado_final_adj  = 5'b01110,
 							estado_final_comp = 5'b01111,
 							estado_final_adv  = 5'b10000,
-							estado_erro       = 5'b10001;
+							estado_erro       = 5'b10001;				
+										
     
 	def[2:0]                        nota_erro = 3'b000,
 									      do  = 3'b001, 
