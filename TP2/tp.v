@@ -12,47 +12,43 @@ module tp(clk,reset,ok,tom,nota,fim,tipo,display);
 	initial begin
 		$dumpfile("onda.vcd");
         $dumpvars(0, tp);
-        $monitor("%b%b%b%b saida = %b%b%b%b%b%b%b", tom, notas1, notas2, notas3, saida1, saida2, saida3, saida4, saida5, saida6, saida7);	
+        $monitor("%b%b%b%b%b%b%b%b saida = %b", nota_x, do, re, mi, fa, sol, la, si, estados);	
 	end
 
-	localparam[4:0]			estado_inicial    = 4'b00000,
-	                        estado_nota1      = 4'b00001,
-	                        estado_nota2_adj  = 4'b00010, 
- 	                        estado_nota2_comp = 4'b00011,
-	                        estado_nota2_adv  = 4'b00100,
-							estado_nota3_adj  = 4'b00101,
-							estado_nota3_comp = 4'b00110,
-							estado_nota3_adv  = 4'b00111,
-							estado_nota4_adj  = 4'b01000,
-							estado_nota4_comp = 4'b01001,
-							estado_nota4_adv  = 4'b01010,
-							estado_nota5_adj  = 4'b01011,
-							estado_nota5_comp = 4'b01100,
-							estado_nota5_adv  = 4'b01101,
-							estado_final_adj  = 4'b01110,
-							estado_final_comp = 4'b01111,
-							estado_final_adv  = 4'b10000,
-							estado_erro       = 4'b10001;				
+	localparam[3:0]			estado_inicial    = 4'b0000,
+	                        estado_nota1      = 4'b0001,
+	                        estado_nota2      = 4'b0010, 
+ 	                        estado_nota3_la   = 4'b0011,
+	                        estado_nota3_si   = 4'b0100,
+							estado_adj	      = 4'b0101,
+							estado_nota4_do   = 4'b0110,
+							estado_nota4_si   = 4'b0111,
+							estado_nota4_re   = 4'b1000,
+							estado_comp       = 4'b1001,
+							estado_adv        = 4'b1010,
+								estado_erro	  = 4'b1011;		
+
+							 				
 										
     
-	localparam[2:0]                       nota_x =2'b000,
-									      do  = 2'b001, 
-									      re  =	2'b010,		
-									      mi  =	2'b011,
-									      fa  = 2'b100,
-									      sol = 2'b101,
-									      la  = 2'b110,
-									      si  = 2'b111;
+	localparam[2:0]                    nota_x = 3'b000,
+									      do  = 3'b001, 
+									      re  =	3'b010,		
+									      mi  =	3'b011,
+									      fa  = 3'b100,
+									      sol = 3'b101,
+									      la  = 3'b110,
+									      si  = 3'b111;
 
-	localparam[1:0]                tipo_nulo = 1'b00,
-								    tipo_adj = 1'b01,
- 								    tipo_comp= 1'b10,
-								    tipo_adv = 1'b11;
+	localparam[1:0]                tipo_nulo = 2'b00,
+								    tipo_adj = 2'b01,
+ 								    tipo_comp= 2'b10,
+								    tipo_adv = 2'b11;
 
-	localparam                    finalizado = 1,
-							     em_processo = 0;
+	localparam                    finalizado = 1'b1,
+							     em_processo = 1'b0;
 	
-	reg[4:0]estados=estado_inicial;
+	reg[3:0] estados=estado_inicial;
 
 	always @(posedge clk) begin
 		if(reset)
@@ -68,111 +64,58 @@ module tp(clk,reset,ok,tom,nota,fim,tipo,display);
 
 					estado_nota1:begin
 						if(nota!=nota_x)
-							estados=estado_nota2_adj;
-						else if(nota!=nota_x)
-							estados=estado_nota2_comp;
-						else if(nota!=nota_x)
-							estados=estado_nota2_adv;	
+							estados=estado_nota2;	
 						else
 							estados=estado_erro;
 					end
 
-					estado_nota2_adj:begin
-						if(nota!=nota_x)
-							estados = estado_nota3_adj;
-						else
-							estados=estado_erro;
-					end
-
-					estado_nota2_comp:begin
-						if(nota!=nota_x)
-							estados = estado_nota3_comp;
-						else
-							estados=estado_erro;
-					end
-
-					estado_nota2_adv:begin
-						if(nota!=nota_x)
-							estados = estado_nota3_adv;
-						else
-							estados=estado_erro;
-					end
-
-					estado_nota3_adj:begin
-						if(nota!=nota_x)
-							estados = estado_nota4_adj;
-						else
-							estados=estado_erro;
-					end
-
-					estado_nota3_comp:begin
-						if((~tom && nota == la) || (~tom && nota == si) )
-					end
-							estados = estado_nota4_comp;
-						else
-							estados=estado_erro;
-
-					estado_nota3_adv:begin
+					estado_nota2:begin
 						if(~tom && nota == la)
-							estados = estado_nota4_adv;
+							estados = estado_nota3_la;
+						else if(~tom && nota == si)
+							estados = estado_nota3_si;
 						else
 							estados=estado_erro;
 					end
 
-					estado_nota4_adj: begin
-						if((~tom && nota == la) || (~tom && nota == si))
-							estados = estado_nota5_adj;
+					estado_nota3_la:begin
+						if(nota == nota_x)
+							estados=estado_adj;
+						else if(tom && nota == do)
+							estados = estado_nota4_do;
+						else if(~tom && nota ==si)
+							estados =estado_nota4_si;			
 						else
-							estados=estado_erro;
+							estados = estado_erro; 
 					end
 
-					estado_nota4_comp:begin
-						if((tom&& nota == do ) ||(tom&& nota == re))
-							estados =estado_nota5_comp;
+					estado_nota3_si:begin
+						if(nota == nota_x)
+							estados = estado_adj;
+						else if(tom && nota == re)
+							estados = estado_nota4_re;
 						else
-							estados=estado_erro;
-					end
-
-					estado_nota4_adv:begin
-						if(~tom && nota == si)
-							estados=estado_nota5_adv;
-						else
-							estados=estado_erro;
+							estados = estado_erro;
 					end	
 
-					estado_nota5_adj: begin
-						if(nota == nota_x)
-							estados = estado_final_adj;
-						else
-							estados=estado_erro;
-					end
-
-					estado_nota5_comp:begin
-						if(nota == nota_x)
-							estados =estado_final_comp;
-						else
-							estados=estado_erro;
-					end
-
-					estado_nota5_adv:begin
-						if(nota == nota_x)
-							estados=estado_final_adv;
-						else
-							estados=estado_erro;
-					end	
-
-					estado_final_adj:begin
+					estado_adj:begin
 						
 					end
-
-					estado_final_comp:begin
+					estado_nota4_do: begin
+						estados = estado_comp; 
+					end
+					estado_nota4_si: begin
+						estados = estado_adv;
+					end
+					estado_nota4_re: begin
+						estados = estado_comp;
+					end
+					estado_comp: begin
 						
 					end
-
+					estado_adv: begin
 						
 					end
-					estado_final_adv:begin
-
 					default: estados = estado_inicial;
 			endcase
 		end
@@ -185,17 +128,17 @@ module tp(clk,reset,ok,tom,nota,fim,tipo,display);
 				tipo = tipo_nulo; 
 			end
 
-			estado_final_adj:begin
+			estado_adj:begin
 				fim = finalizado;
 				tipo = tipo_adj;
 			end
 
-			estado_final_comp:begin
+			estado_comp:begin
 				fim = finalizado;
 				tipo = tipo_comp;
 			end
 
-			estado_final_adv:begin
+			estado_adv:begin
 				fim = finalizado;
 				tipo = tipo_adv;
 			end
