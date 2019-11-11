@@ -29,7 +29,7 @@ module tp(clk,reset,ok,tom,nota,fim,tipo,display);
 							estado_erro       = 5'b10001;				
 										
     
-	def[2:0]                        nota_erro = 3'b000,
+	def[2:0]                           nota_x =   3'b000,
 									      do  = 3'b001, 
 									      re  =	3'b010,		
 									      mi  =	3'b011,
@@ -53,7 +53,44 @@ module tp(clk,reset,ok,tom,nota,fim,tipo,display);
 			estatos=estado_inicial;
 		else if(ok) begin
 			case(estados)
-				
+				estado_inicial:begin
+					if(nota!=nota_x)
+						estados=estado_nota1;
+					else
+						estados=estado_erro;
+				end
+
+				estado_nota1:begin
+					if(nota!=nota_x)
+						estados=estado_nota2_adj;
+					else if((~tom && nota==la) ||(~tom && nota==si))
+						estados=estado_nota2_comp;
+					else if(~tom && nota==la)
+						estados=estado_nota2_adv;
+					else
+						estados=estado_erro;
+				end
+
+				estado_nota2_adj:begin
+					if((~tom && nota==la) ||(~tom && nota==si))
+						estados=estado_nota3_adj;
+					else
+						estados=estado_erro;
+				end
+
+				estado_nota2_comp:begin
+					if((tom && nota == do) || (tom && nota == re))
+						estados=estado_nota3_comp;
+					else
+						estados=estado_erro;
+				end
+
+				estado_nota2_adv:begin
+					if(~tom && nota == si)
+						estados=estado_nota3_adv;
+					else
+						estados=estado_erro;
+				end
 			endcase
 		end
 	end	
