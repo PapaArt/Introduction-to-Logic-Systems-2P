@@ -22,42 +22,54 @@ module tp(clk,reset,ok,tom,nota,fim,tipo,display);
 							 				
 										
     
-	localparam[2:0]                    nota_x = 3'b000,
-									      do  = 3'b001, 
-									      re  =	3'b010,		
-									      mi  =	3'b011,
-									      fa  = 3'b100,
-									      sol = 3'b101,
-									      la  = 3'b110,
-									      si  = 3'b111;
+	localparam[3:0]                    nota_x1 = 4'b0000,
+									      do  = 4'b0001, 
+									      re  =	4'b0010,		
+									      mi  =	4'b0011,
+									      fa  = 4'b0100,
+									      sol = 4'b0101,
+									      la  = 4'b0110,
+									      si  = 4'b0111;
+									  nota_x2 = 4'b1000;  
+										 do_m = 4'b1001;
+										 re_m = 4'b1010;
+									     mi_m = 4'b1011;
+										 fa_m = 4'b1100;
+									    sol_m = 4'b1101;
+										 la_m = 4'b1110;
+										 si_m = 4'b1111;
 
-	localparam[1:0]                tipo_nulo = 2'b00,
-								    tipo_adj = 2'b01,
- 								    tipo_comp= 2'b10,
-								    tipo_adv = 2'b11;
+	localparam[1:0]                 tipo_nulo = 2'b00,
+								    tipo_adj  = 2'b01,
+ 								    tipo_comp = 2'b10,
+								    tipo_adv  = 2'b11;
 
 	localparam                    finalizado = 1'b1,
 							     em_processo = 1'b0;
 	
-	reg[3:0] estados=estado_inicial;
+	reg[3:0] estados, proximo_estado;
 
 	always @(posedge clk) begin
 		if(reset)
-			estados=estado_inicial;
-		else if(ok) begin
-			case(estados)
+			estados = estado_inicial;
+		else
+			estados = proximo_estado;
+		end
+	end
+	always @(posedge ok) begin
+		case(estados)
 					estado_inicial:begin
-						if(nota!=nota_x)
-							estados=estado_nota1;
+						if(nota == nota_x1) & (nota == nota_x2)
+							estados = estado_nota1;
 						else
-							estados=estado_erro;						
+							estados = estado_erro;						
 					end
 
 					estado_nota1:begin
-						if(nota!=nota_x)
-							estados=estado_nota2;	
+						if(nota == nota_x1) & (nota == nota_x2) 
+							estados = estado_nota2;	
 						else
-							estados=estado_erro;
+							estados = estado_erro;
 					end
 
 					estado_nota2:begin
@@ -66,22 +78,22 @@ module tp(clk,reset,ok,tom,nota,fim,tipo,display);
 						else if(~tom && nota == si)
 							estados = estado_nota3_si;
 						else
-							estados=estado_erro;
+							estados = estado_erro;
 					end
 
 					estado_nota3_la:begin
-						if(nota == nota_x)
-							estados=estado_adj;
+						if(nota == nota_x1) & (nota == nota_x2)
+							estados = estado_adj;
 						else if(tom && nota == do)
 							estados = estado_nota4_do;
 						else if(~tom && nota ==si)
-							estados =estado_nota4_si;			
+							estados = estado_nota4_si;			
 						else
 							estados = estado_erro; 
 					end
 
 					estado_nota3_si:begin
-						if(nota == nota_x)
+						if(nota == nota_x1) & (nota == nota_x2)
 							estados = estado_adj;
 						else if(tom && nota == re)
 							estados = estado_nota4_re;
@@ -109,7 +121,6 @@ module tp(clk,reset,ok,tom,nota,fim,tipo,display);
 					end
 					default: estados = estado_inicial;
 			endcase
-		end
 	end
 
 	always @ (estados)begin
