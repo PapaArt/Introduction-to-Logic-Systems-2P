@@ -1,19 +1,10 @@
 /*Trabalho Maquina de Estado Finito-Módulo Adjetivo e Advérbio*/
-`include "Alfa_desc.v"
 module tp(clk,reset,ok,tom,nota,fim,tipo,display);
     input ok, tom, reset, clk;
 	input [2:0] nota;
 	output reg fim;
 	output reg [1:0] tipo;
 	output [6:0] display;
-
-    Alfa_desc Adverbio(Tom, notas1, notas2, notas3, saida1, saida2, saida3, saida4, saida5, saida6, saida7);
-	
-	initial begin
-		$dumpfile("onda.vcd");
-        $dumpvars(0, tp);
-        $monitor("%b%b%b%b%b%b%b%b saida = %b", nota_x, do, re, mi, fa, sol, la, si, estados);	
-	end
 
 	localparam[3:0]			estado_inicial    = 4'b0000,
 	                        estado_nota1      = 4'b0001,
@@ -26,7 +17,7 @@ module tp(clk,reset,ok,tom,nota,fim,tipo,display);
 							estado_nota4_re   = 4'b1000,
 							estado_comp       = 4'b1001,
 							estado_adv        = 4'b1010,
-								estado_erro	  = 4'b1011;		
+							estado_erro	  	  = 4'b1011;		
 
 							 				
 										
@@ -149,4 +140,4 @@ module tp(clk,reset,ok,tom,nota,fim,tipo,display);
 			end
 		endcase
 	end	
-endmodule		
+endmodule
