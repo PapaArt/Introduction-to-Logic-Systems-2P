@@ -28,11 +28,6 @@
 			<y>299.0</y>
 			<output>01</output>
 		</state>
-		<state id="5" name="Erro">
-			<x>694.0</x>
-			<y>44.0</y>
-			<output>00</output>
-		</state>
 		<state id="6" name="4ºLetra">
 			<x>1033.0</x>
 			<y>115.0</y>
@@ -65,40 +60,22 @@
 		</state>
 		<!--The list of transitions.-->
 		<transition>
-			<from>1</from>
-			<to>4</to>
-			<read>ok=1,Letra,Bm</read>
-			<transout>01</transout>
-		</transition>
-		<transition>
-			<from>8</from>
-			<to>8</to>
-			<read/>
-			<transout>00</transout>
-		</transition>
-		<transition>
-			<from>8</from>
-			<to>10</to>
-			<read/>
-			<transout>10</transout>
-		</transition>
-		<transition>
 			<from>3</from>
 			<to>7</to>
 			<read>ok=1,Letra=Bm</read>
 			<transout>00</transout>
 		</transition>
 		<transition>
-			<from>3</from>
-			<to>5</to>
-			<read>ok=0,Letra=X</read>
-			<transout>00</transout>
+			<from>6</from>
+			<to>10</to>
+			<read>1000 e 0000</read>
+			<transout>10</transout>
 		</transition>
 		<transition>
-			<from>4</from>
-			<to>5</to>
-			<read>ok=0,Letra=X</read>
-			<transout>00</transout>
+			<from>1</from>
+			<to>4</to>
+			<read>ok=1,Letra,Bm</read>
+			<transout>01</transout>
 		</transition>
 		<transition>
 			<from>0</from>
@@ -107,15 +84,21 @@
 			<transout>00</transout>
 		</transition>
 		<transition>
-			<from>2</from>
-			<to>1</to>
-			<read>ok=1,Letra!=x</read>
-			<transout>00</transout>
+			<from>7</from>
+			<to>11</to>
+			<read>1000 e 0000</read>
+			<transout>11</transout>
+		</transition>
+		<transition>
+			<from>8</from>
+			<to>10</to>
+			<read>1000 e 0000</read>
+			<transout>10</transout>
 		</transition>
 		<transition>
 			<from>2</from>
-			<to>5</to>
-			<read>ok=0,Letra=X</read>
+			<to>1</to>
+			<read>ok=1,Letra!=x</read>
 			<transout>00</transout>
 		</transition>
 		<transition>
@@ -125,40 +108,10 @@
 			<transout>00</transout>
 		</transition>
 		<transition>
-			<from>7</from>
-			<to>5</to>
-			<read>ok=0,Letra=X</read>
-			<transout>00</transout>
-		</transition>
-		<transition>
-			<from>4</from>
-			<to>9</to>
-			<read/>
-			<transout>01</transout>
-		</transition>
-		<transition>
 			<from>3</from>
 			<to>9</to>
-			<read/>
+			<read>1000 e 0000</read>
 			<transout>01</transout>
-		</transition>
-		<transition>
-			<from>6</from>
-			<to>5</to>
-			<read>ok=0,Letra=X</read>
-			<transout>00</transout>
-		</transition>
-		<transition>
-			<from>1</from>
-			<to>3</to>
-			<read>ok=1,Letra=Am</read>
-			<transout>01</transout>
-		</transition>
-		<transition>
-			<from>8</from>
-			<to>5</to>
-			<read>ok=0,Letra=X</read>
-			<transout>00</transout>
 		</transition>
 		<transition>
 			<from>4</from>
@@ -168,21 +121,15 @@
 		</transition>
 		<transition>
 			<from>1</from>
-			<to>5</to>
-			<read>ok=0,Letra=X</read>
-			<transout>00</transout>
+			<to>3</to>
+			<read>ok=1,Letra=Am</read>
+			<transout>01</transout>
 		</transition>
 		<transition>
-			<from>6</from>
-			<to>10</to>
-			<read/>
-			<transout>10</transout>
-		</transition>
-		<transition>
-			<from>7</from>
-			<to>11</to>
-			<read/>
-			<transout>11</transout>
+			<from>4</from>
+			<to>9</to>
+			<read>1000 e 0000</read>
+			<transout>01</transout>
 		</transition>
 	</automaton>
 </structure>
