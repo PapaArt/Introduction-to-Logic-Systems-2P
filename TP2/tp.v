@@ -29,14 +29,14 @@ module tp(clk,reset,ok,tom,nota,fim,tipo,display);
 									      fa  = 4'b0100,
 									      sol = 4'b0101,
 									      la  = 4'b0110,
-									      si  = 4'b0111;
-									  nota_x2 = 4'b1000;  
-										 do_m = 4'b1001;
-										 re_m = 4'b1010;
-									     mi_m = 4'b1011;
-										 fa_m = 4'b1100;
-									    sol_m = 4'b1101;
-										 la_m = 4'b1110;
+									      si  = 4'b0111,
+									  nota_x2 = 4'b1000,  
+										 do_m = 4'b1001,
+										 re_m = 4'b1010,
+									     mi_m = 4'b1011,
+										 fa_m = 4'b1100,
+									    sol_m = 4'b1101,
+										 la_m = 4'b1110,
 										 si_m = 4'b1111;
 
 
@@ -55,74 +55,80 @@ module tp(clk,reset,ok,tom,nota,fim,tipo,display);
 			estados = estado_inicial;
 		else
 			estados = proximo_estado;
-		end
 	end
 	
 	always @(posedge ok) begin
 		case(estados)
-					estado_inicial:begin
-						if(nota == nota_x1) & (nota == nota_x2)
-							estados = estado_nota1;
-						else
-							estados = estado_erro;						
-					end
+			estado_inicial:begin
+				if(nota == nota_x1 && nota == nota_x2)
+					estados = estado_nota1;
+				else
+					estados = estado_erro;						
+			end
 
-					estado_nota1:begin
-						if(nota == nota_x1) & (nota == nota_x2) 
-							estados = estado_nota2;	
-						else
-							estados = estado_erro;
-					end
+			estado_nota1:begin
+				if(nota == nota_x1 && nota == nota_x2) 
+					estados = estado_nota2;	
+				else
+					estados = estado_erro;
+			end
 
-					estado_nota2:begin
-						if(~tom && nota == la)
-							estados = estado_nota3_la;
-						else if(~tom && nota == si)
-							estados = estado_nota3_si;
-						else
-							estados = estado_erro;
-					end
+			estado_nota2:begin
+				if(~tom && nota == la)
+					estados = estado_nota3_la;
+				else if(~tom && nota == si)
+					estados = estado_nota3_si;
+				else
+					estados = estado_erro;
+			end
 
-					estado_nota3_la:begin
-						if(nota == nota_x1) & (nota == nota_x2)
-							estados = estado_adj;
-						else if(tom && nota == do)
-							estados = estado_nota4_do;
-						else if(~tom && nota ==si)
-							estados = estado_nota4_si;			
-						else
-							estados = estado_erro; 
-					end
+			estado_nota3_la:begin
+				if(nota == nota_x1 && nota == nota_x2)
+					estados = estado_adj;
+				else if(tom && nota == do)
+					estados = estado_nota4_do;
+				else if(~tom && nota ==si)
+					estados = estado_nota4_si;			
+				else
+					estados = estado_erro; 
+			end
 
-					estado_nota3_si:begin
-						if(nota == nota_x1) & (nota == nota_x2)
-							estados = estado_adj;
-						else if(tom && nota == re)
-							estados = estado_nota4_re;
-						else
-							estados = estado_erro;
-					end	
+			estado_nota3_si:begin
+				if(nota == nota_x1 && nota == nota_x2)
+					estados = estado_adj;
+				else if(tom && nota == re)
+					estados = estado_nota4_re;
+				else
+					estados = estado_erro;
+			end	
 
-					estado_adj:begin
+			estado_adj:begin
 						
-					end
-					estado_nota4_do: begin
-						estados = estado_comp; 
-					end
-					estado_nota4_si: begin
-						estados = estado_adv;
-					end
-					estado_nota4_re: begin
-						estados = estado_comp;
-					end
-					estado_comp: begin
+			end
+			
+			estado_nota4_do: begin
+				estados = estado_comp; 
+			end
+
+			estado_nota4_si: begin
+				estados = estado_adv;
+			end
+			
+			estado_nota4_re: begin
+				estados = estado_comp;
+			end
+			
+			estado_comp: begin
 						
-					end
-					estado_adv: begin
+			end
+			
+			estado_adv: begin
 						
-					end
-					default: estados = estado_inicial;
-			endcase
+			end
+
+			default: estados = estado_inicial;
+	
+		endcase
 	end
 
 	always @ (estados)begin
