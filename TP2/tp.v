@@ -1,7 +1,7 @@
 /*Trabalho Maquina de Estado Finito-Módulo Adjetivo e Advérbio*/
 module novo(clk,reset,ok,nota,fim,tipo,display);
-    input ok, reset, clk;
-	input [2:0] nota;
+    input wire ok, reset, clk;
+	input wire [2:0] nota;
 	output reg fim;
 	output reg [1:0] tipo;
 	output [6:0] display;
