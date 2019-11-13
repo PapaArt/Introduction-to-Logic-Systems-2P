@@ -3,67 +3,79 @@
 	<automaton>
 		<!--The list of states.-->
 		<state id="0" name="Inicio">
-			<x>181.0</x>
-			<y>235.0</y>
+			<x>115.0</x>
+			<y>233.0</y>
 			<initial/>
 			<output>00</output>
 		</state>
 		<state id="1" name="2ºLetra">
-			<x>533.0</x>
-			<y>235.0</y>
+			<x>521.0</x>
+			<y>233.0</y>
 			<output>00</output>
 		</state>
 		<state id="2" name="1ºLetra">
-			<x>359.0</x>
-			<y>235.0</y>
+			<x>320.0</x>
+			<y>233.0</y>
 			<output>00</output>
 		</state>
 		<state id="3" name="3ºLetra">
-			<x>757.0</x>
-			<y>212.0</y>
+			<x>749.0</x>
+			<y>106.0</y>
 			<output>01</output>
 		</state>
 		<state id="4" name="3ºLetra">
-			<x>722.0</x>
-			<y>299.0</y>
+			<x>754.0</x>
+			<y>301.0</y>
 			<output>01</output>
 		</state>
 		<state id="6" name="4ºLetra">
-			<x>1033.0</x>
-			<y>115.0</y>
+			<x>1016.0</x>
+			<y>157.0</y>
 			<output>00</output>
 		</state>
 		<state id="7" name="4ºLetra">
-			<x>1151.0</x>
-			<y>183.0</y>
+			<x>1012.0</x>
+			<y>42.0</y>
 			<output>00</output>
 		</state>
 		<state id="8" name="4ºLetra">
-			<x>941.0</x>
-			<y>250.0</y>
+			<x>1178.0</x>
+			<y>301.0</y>
 			<output>00</output>
 		</state>
 		<state id="9" name="adj">
-			<x>802.0</x>
-			<y>371.0</y>
+			<x>872.0</x>
+			<y>201.0</y>
 			<output>01</output>
 		</state>
 		<state id="10" name="comp">
-			<x>1179.0</x>
-			<y>110.0</y>
+			<x>1178.0</x>
+			<y>157.0</y>
 			<output>10</output>
 		</state>
 		<state id="11" name="adv">
-			<x>1161.0</x>
-			<y>286.0</y>
+			<x>1179.0</x>
+			<y>42.0</y>
 			<output>11</output>
 		</state>
 		<!--The list of transitions.-->
 		<transition>
-			<from>3</from>
-			<to>7</to>
-			<read>ok=1,Letra=Bm</read>
+			<from>1</from>
+			<to>3</to>
+			<read>ok=1,Letra=Am</read>
+			<transout>01</transout>
+		</transition>
+		<transition>
+			<from>2</from>
+			<to>1</to>
+			<read>ok=1,Letra!=x</read>
 			<transout>00</transout>
+		</transition>
+		<transition>
+			<from>7</from>
+			<to>11</to>
+			<read>1000 e 0000</read>
+			<transout>11</transout>
 		</transition>
 		<transition>
 			<from>6</from>
@@ -84,22 +96,16 @@
 			<transout>00</transout>
 		</transition>
 		<transition>
-			<from>7</from>
-			<to>11</to>
+			<from>3</from>
+			<to>9</to>
 			<read>1000 e 0000</read>
-			<transout>11</transout>
+			<transout>01</transout>
 		</transition>
 		<transition>
-			<from>8</from>
-			<to>10</to>
+			<from>4</from>
+			<to>9</to>
 			<read>1000 e 0000</read>
-			<transout>10</transout>
-		</transition>
-		<transition>
-			<from>2</from>
-			<to>1</to>
-			<read>ok=1,Letra!=x</read>
-			<transout>00</transout>
+			<transout>01</transout>
 		</transition>
 		<transition>
 			<from>3</from>
@@ -109,27 +115,21 @@
 		</transition>
 		<transition>
 			<from>3</from>
-			<to>9</to>
+			<to>7</to>
+			<read>ok=1,Letra=Bm</read>
+			<transout>00</transout>
+		</transition>
+		<transition>
+			<from>8</from>
+			<to>10</to>
 			<read>1000 e 0000</read>
-			<transout>01</transout>
+			<transout>10</transout>
 		</transition>
 		<transition>
 			<from>4</from>
 			<to>8</to>
 			<read>ok=1,letra=D</read>
 			<transout>00</transout>
-		</transition>
-		<transition>
-			<from>1</from>
-			<to>3</to>
-			<read>ok=1,Letra=Am</read>
-			<transout>01</transout>
-		</transition>
-		<transition>
-			<from>4</from>
-			<to>9</to>
-			<read>1000 e 0000</read>
-			<transout>01</transout>
 		</transition>
 	</automaton>
 </structure>

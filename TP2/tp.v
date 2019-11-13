@@ -22,7 +22,7 @@ module tp(clk,reset,ok,tom,nota,fim,tipo,display);
 							 				
 										
     
-	localparam[3:0]                    nota_x1 = 4'b0000,
+	localparam[3:0]                   nota_x1 = 4'b0000,
 									      do  = 4'b0001, 
 									      re  =	4'b0010,		
 									      mi  =	4'b0011,
@@ -38,6 +38,7 @@ module tp(clk,reset,ok,tom,nota,fim,tipo,display);
 									    sol_m = 4'b1101;
 										 la_m = 4'b1110;
 										 si_m = 4'b1111;
+
 
 	localparam[1:0]                 tipo_nulo = 2'b00,
 								    tipo_adj  = 2'b01,
@@ -56,6 +57,7 @@ module tp(clk,reset,ok,tom,nota,fim,tipo,display);
 			estados = proximo_estado;
 		end
 	end
+	
 	always @(posedge ok) begin
 		case(estados)
 					estado_inicial:begin
