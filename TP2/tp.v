@@ -18,9 +18,6 @@ module tp(clk,reset,ok,tom,nota,fim,tipo,display);
 							estado_comp       = 4'b1001,
 							estado_adv        = 4'b1010,
 							estado_erro	  	  = 4'b1011;		
-
-							 				
-										
     
 	localparam[3:0]                   nota_x1 = 4'b0000,
 									      do  = 4'b0001, 
@@ -39,14 +36,13 @@ module tp(clk,reset,ok,tom,nota,fim,tipo,display);
 										 la_m = 4'b1110,
 										 si_m = 4'b1111;
 
+	localparam[1:0]              	   tipo_nulo = 2'b00,
+								       tipo_adj  = 2'b01,
+ 								       tipo_comp = 2'b10,
+								       tipo_adv  = 2'b11;
 
-	localparam[1:0]                 tipo_nulo = 2'b00,
-								    tipo_adj  = 2'b01,
- 								    tipo_comp = 2'b10,
-								    tipo_adv  = 2'b11;
-
-	localparam                    finalizado = 1'b1,
-							     em_processo = 1'b0;
+	localparam                         finalizado = 1'b1,
+							          em_processo = 1'b0;
 	
 	reg[3:0] estados, proximo_estado;
 
@@ -57,78 +53,96 @@ module tp(clk,reset,ok,tom,nota,fim,tipo,display);
 			estados = proximo_estado;
 	end
 	
-	always @(posedge ok) begin
+	always @(posedge ok or posedge reset) begin
+		if (reset) begin
+			proximo_estado = estado_inicial;
+		end
+		else begin
 		case(estados)
 			estado_inicial:begin
-				if(nota == nota_x1 && nota == nota_x2)
-					estados = estado_nota1;
+				if(nota != nota_x1 && nota != nota_x2)
+					proximo_estado = estado_nota1;
 				else
-					estados = estado_erro;						
+					proximo_estado = estado_erro;						
 			end
 
 			estado_nota1:begin
-				if(nota == nota_x1 && nota == nota_x2) 
-					estados = estado_nota2;	
+				if(nota != nota_x1 && nota != nota_x2) 
+					proximo_estado = estado_nota2;	
 				else
-					estados = estado_erro;
+					proximo_estado = estado_erro;
 			end
 
 			estado_nota2:begin
-				if(~tom && nota == la)
-					estados = estado_nota3_la;
-				else if(~tom && nota == si)
-					estados = estado_nota3_si;
+				if(nota == la)
+					proximo_estado = estado_nota3_la;
+				else if(nota == si_m)
+					proximo_estado = estado_nota3_si;
 				else
-					estados = estado_erro;
+					proximo_estado = estado_erro;
 			end
 
 			estado_nota3_la:begin
-				if(nota == nota_x1 && nota == nota_x2)
-					estados = estado_adj;
-				else if(tom && nota == do)
-					estados = estado_nota4_do;
-				else if(~tom && nota ==si)
-					estados = estado_nota4_si;			
+				if(nota == nota_x1 || nota == nota_x2)
+					proximo_estado = estado_adj;
+				else if(nota == do)
+					proximo_estado = estado_nota4_do;
+				else if(nota == si_m)
+					proximo_estado = estado_nota4_si;			
 				else
-					estados = estado_erro; 
+					proximo_estado = estado_erro; 
 			end
 
 			estado_nota3_si:begin
-				if(nota == nota_x1 && nota == nota_x2)
-					estados = estado_adj;
-				else if(tom && nota == re)
-					estados = estado_nota4_re;
+				if(nota == nota_x1 || nota == nota_x2)
+					proximo_estado = estado_adj;
+				else if(nota == re)
+					proximo_estado = estado_nota4_re;
 				else
-					estados = estado_erro;
+					proximo_estado = estado_erro;
 			end	
 
 			estado_adj:begin
-						
+				proximo_estado = estado_adj;
 			end
 			
 			estado_nota4_do: begin
-				estados = estado_comp; 
+			if(nota == nota_x1 || nota == nota_x2)
+				proximo_estado = estado_comp;
+			else
+				proximo_estado = estado_erro; 
 			end
 
 			estado_nota4_si: begin
-				estados = estado_adv;
+			if(nota == nota_x1 || nota == nota_x2)
+				proximo_estado = estado_adv;
+			else
+				proximo_estado = estado_erro;
 			end
 			
 			estado_nota4_re: begin
-				estados = estado_comp;
+			if(nota == nota_x1 || nota == nota_x2)
+				proximo_estado = estado_comp;
+			else
+				proximo_estado = estado_erro;
 			end
 			
 			estado_comp: begin
-						
+				proximo_estado = estado_comp;		
 			end
 			
 			estado_adv: begin
-						
+				proximo_estado = estado_adv;		
+			end
+
+			estado_erro:begin
+				proximo_estado = estado_erro;	
 			end
 
 			default: estados = estado_inicial;
 	
 		endcase
+		end
 	end
 
 	always @ (estados)begin
@@ -152,6 +166,7 @@ module tp(clk,reset,ok,tom,nota,fim,tipo,display);
 				fim = finalizado;
 				tipo = tipo_adv;
 			end
+
 
 			default:begin
 				fim=em_processo;
