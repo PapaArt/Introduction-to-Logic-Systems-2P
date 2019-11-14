@@ -1,12 +1,12 @@
 /*Trabalho Maquina de Estado Finito-Módulo Adjetivo e Advérbio*/
-module tp(clk,reset,ok,tom,nota,fim,tipo,display);
-    input wire ok, tom, reset, clk;
-	input  wire [2:0] nota;
+module tp2(clk,reset,ok,nota,fim,tipo,estados);
+    input wire ok,reset, clk;
+	input  wire [3:0] nota;
 	output reg fim;
 	output reg [1:0] tipo;
-	output [6:0] display;
+	
 
-	localparam[3:0]			estado_inicial    = 4'b0000,
+	parameter 			estado_inicial    = 4'b0000,
 	                        estado_nota1      = 4'b0001,
 	                        estado_nota2      = 4'b0010, 
  	                        estado_nota3_la   = 4'b0011,
@@ -19,7 +19,7 @@ module tp(clk,reset,ok,tom,nota,fim,tipo,display);
 							estado_adv        = 4'b1010,
 							estado_erro	  	  = 4'b1011;		
     
-	localparam[3:0]                   nota_x1 = 4'b0000,
+	parameter                   nota_x1 = 4'b0000,
 									      do  = 4'b0001, 
 									      re  =	4'b0010,		
 									      mi  =	4'b0011,
@@ -36,15 +36,16 @@ module tp(clk,reset,ok,tom,nota,fim,tipo,display);
 										 la_m = 4'b1110,
 										 si_m = 4'b1111;
 
-	localparam[1:0]              	   tipo_nulo = 2'b00,
+	parameter               	   tipo_nulo = 2'b00,
 								       tipo_adj  = 2'b01,
  								       tipo_comp = 2'b10,
 								       tipo_adv  = 2'b11;
 
-	localparam                         finalizado = 1'b1,
+	parameter                          finalizado = 1'b1,
 							          em_processo = 1'b0;
 	
-	reg[3:0] estados, proximo_estado;
+	output reg[3:0] estados;
+	reg [3:0] proximo_estado;
 
 	always @(posedge clk) begin
 		if(reset)
@@ -60,10 +61,10 @@ module tp(clk,reset,ok,tom,nota,fim,tipo,display);
 		else begin
 		case(estados)
 			estado_inicial:begin
-				if(nota != nota_x1 && nota != nota_x2)
-					proximo_estado = estado_nota1;
+				if(nota == nota_x1 || nota == nota_x2)
+					proximo_estado = estado_erro;
 				else
-					proximo_estado = estado_erro;						
+					proximo_estado = estado_nota1;					
 			end
 
 			estado_nota1:begin
@@ -74,7 +75,7 @@ module tp(clk,reset,ok,tom,nota,fim,tipo,display);
 			end
 
 			estado_nota2:begin
-				if(nota == la)
+				if(nota == la_m)
 					proximo_estado = estado_nota3_la;
 				else if(nota == si_m)
 					proximo_estado = estado_nota3_si;
@@ -138,8 +139,6 @@ module tp(clk,reset,ok,tom,nota,fim,tipo,display);
 			estado_erro:begin
 				proximo_estado = estado_erro;	
 			end
-
-			default: estados = estado_inicial;
 	
 		endcase
 		end
