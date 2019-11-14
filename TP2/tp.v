@@ -1,7 +1,7 @@
 /*Trabalho Maquina de Estado Finito-Módulo Adjetivo e Advérbio*/
-module novo(clk,reset,ok,nota,fim,tipo,display);
-    input wire ok, reset, clk;
-	input wire [2:0] nota;
+module tp(clk,reset,ok,tom,nota,fim,tipo,display);
+    input wire ok, tom, reset, clk;
+	input  wire [2:0] nota;
 	output reg fim;
 	output reg [1:0] tipo;
 	output [6:0] display;
@@ -167,6 +167,30 @@ module novo(clk,reset,ok,nota,fim,tipo,display);
 				tipo = tipo_adv;
 			end
 
+			estado_nota3_la:begin
+				fim=em_processo;
+				tipo = tipo_nulo;
+			end
+
+			estado_nota3_si:begin
+				fim=em_processo;
+				tipo =tipo_nulo;
+			end
+
+			estado_nota4_do:begin
+				fim=em_processo;
+				tipo =tipo_nulo;
+			end
+
+			estado_nota4_si:begin
+				fim=em_processo;
+				tipo =tipo_nulo;
+			end
+
+			estado_nota4_re:begin
+				fim=em_processo;
+				tipo =tipo_nulo;
+			end
 
 			default:begin
 				fim=em_processo;
