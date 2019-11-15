@@ -6,7 +6,7 @@ module tp2(clk,reset,ok,nota,fim,tipo,estados);
 	output reg [1:0] tipo;
 	
 
-	parameter 			estado_inicial    = 4'b0000,
+	parameter 			    estado_inicial    = 4'b0000,
 	                        estado_nota1      = 4'b0001,
 	                        estado_nota2      = 4'b0010, 
  	                        estado_nota3_la   = 4'b0011,
@@ -19,7 +19,7 @@ module tp2(clk,reset,ok,nota,fim,tipo,estados);
 							estado_adv        = 4'b1010,
 							estado_erro	  	  = 4'b1011;		
     
-	parameter                   nota_x1 = 4'b0000,
+	parameter                         nota_x1 = 4'b0000,
 									      do  = 4'b0001, 
 									      re  =	4'b0010,		
 									      mi  =	4'b0011,
@@ -36,7 +36,7 @@ module tp2(clk,reset,ok,nota,fim,tipo,estados);
 										 la_m = 4'b1110,
 										 si_m = 4'b1111;
 
-	parameter               	   tipo_nulo = 2'b00,
+	parameter               	       tipo_nulo = 2'b00,
 								       tipo_adj  = 2'b01,
  								       tipo_comp = 2'b10,
 								       tipo_adv  = 2'b11;
