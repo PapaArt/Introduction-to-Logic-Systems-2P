@@ -1,0 +1,1 @@
+#Código para identificar  a ocorrência de um número PAR* de 1s após ter ocorrido dois zeros consecutivos.
