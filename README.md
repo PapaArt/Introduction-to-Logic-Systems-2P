@@ -5,7 +5,7 @@
 ![tablagray](https://user-images.githubusercontent.com/45442173/68965773-5ab03e80-07bb-11ea-9d54-1dd9cc6c4a52.gif) ![concodgray](https://user-images.githubusercontent.com/45442173/68966215-559fbf00-07bc-11ea-97cf-be0c19327a78.gif)
 
 
-<h1><a href="https://github.com/lucianobajr/ISL-2P/tree/master/Maquina%20de%20Moore">Maquina de Moore</a></h1>
+<h1><a href="https://github.com/lucianobajr/ISL-2P/tree/master/Maquinas%20de%20Estado%20Finito">Maquina de Estados Finito</a></h1>
 
 ![MAQUINAS SECUENCIALES](https://user-images.githubusercontent.com/45442173/68966510-0d34d100-07bd-11ea-9b50-727df8417a5d.jpg)
 
