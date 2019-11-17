@@ -46,16 +46,16 @@
 			<transout>01</transout>
 		</transition>
 		<transition>
+			<from>5</from>
+			<to>0</to>
+			<read>0,1</read>
+			<transout>00</transout>
+		</transition>
+		<transition>
 			<from>2</from>
 			<to>3</to>
 			<read>1</read>
 			<transout>11</transout>
-		</transition>
-		<transition>
-			<from>3</from>
-			<to>4</to>
-			<read>1</read>
-			<transout>00</transout>
 		</transition>
 		<transition>
 			<from>0</from>
@@ -71,21 +71,15 @@
 		</transition>
 		<transition>
 			<from>3</from>
-			<to>2</to>
-			<read>0</read>
-			<transout>10</transout>
+			<to>4</to>
+			<read>1</read>
+			<transout>00</transout>
 		</transition>
 		<transition>
 			<from>1</from>
 			<to>2</to>
 			<read>0</read>
 			<transout>10</transout>
-		</transition>
-		<transition>
-			<from>5</from>
-			<to>0</to>
-			<read>0,1</read>
-			<transout>00</transout>
 		</transition>
 	</automaton>
 </structure>
