@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><!--Created with JFLAP 7.1.--><structure>
+	<type>moore</type>
+	<automaton>
+		<!--The list of states.-->
+		<state id="0" name="PAR/N°">
+			<x>147.0</x>
+			<y>174.0</y>
+			<output>00</output>
+		</state>
+		<state id="1" name="Impar/N°">
+			<x>395.0</x>
+			<y>172.0</y>
+			<output>01</output>
+		</state>
+		<!--The list of transitions.-->
+		<transition>
+			<from>0</from>
+			<to>0</to>
+			<read>0</read>
+			<transout>00</transout>
+		</transition>
+		<transition>
+			<from>1</from>
+			<to>1</to>
+			<read>0</read>
+			<transout>01</transout>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>1</to>
+			<read>1</read>
+			<transout>01</transout>
+		</transition>
+		<transition>
+			<from>1</from>
+			<to>0</to>
+			<read>1</read>
+			<transout>00</transout>
+		</transition>
+	</automaton>
+</structure>
