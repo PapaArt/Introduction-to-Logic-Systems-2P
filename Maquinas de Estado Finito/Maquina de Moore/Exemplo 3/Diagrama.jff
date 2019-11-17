@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><!--Created with JFLAP 7.1.--><structure>
+	<type>moore</type>
+	<automaton>
+		<!--The list of states.-->
+		<state id="0" name="In">
+			<x>131.0</x>
+			<y>177.0</y>
+			<output>00</output>
+		</state>
+		<state id="1" name="S0">
+			<x>267.0</x>
+			<y>177.0</y>
+			<output>00</output>
+		</state>
+		<state id="2" name="S1">
+			<x>439.0</x>
+			<y>177.0</y>
+			<output>01</output>
+		</state>
+		<state id="3" name="S2">
+			<x>353.0</x>
+			<y>297.0</y>
+			<output>10</output>
+		</state>
+		<!--The list of transitions.-->
+		<transition>
+			<from>1</from>
+			<to>1</to>
+			<read>0</read>
+			<transout>00</transout>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>1</to>
+			<read>1,0</read>
+			<transout>00</transout>
+		</transition>
+		<transition>
+			<from>2</from>
+			<to>2</to>
+			<read>0</read>
+			<transout>01</transout>
+		</transition>
+		<transition>
+			<from>3</from>
+			<to>1</to>
+			<read>1</read>
+			<transout>00</transout>
+		</transition>
+		<transition>
+			<from>1</from>
+			<to>2</to>
+			<read>1</read>
+			<transout>01</transout>
+		</transition>
+		<transition>
+			<from>2</from>
+			<to>3</to>
+			<read>1</read>
+			<transout>10</transout>
+		</transition>
+		<transition>
+			<from>3</from>
+			<to>3</to>
+			<read>0</read>
+			<transout>10</transout>
+		</transition>
+	</automaton>
+</structure>
