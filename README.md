@@ -1,4 +1,4 @@
-# ISL-2P
+# ISL-2P [![Build Status](https://travis-ci.org/lucianobajr/ISL-2P.svg?branch=master)](https://travis-ci.org/lucianobajr/ISL-2P) 
 
 <h1><a href="https://github.com/lucianobajr/ISL-2P/tree/master/Codigo%20Gray">Codigo Gray</a></h1>
 
