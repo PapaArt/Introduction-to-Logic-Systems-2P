@@ -3,3 +3,4 @@ install:
   -make install
 script:
   -make test
+os: linux
